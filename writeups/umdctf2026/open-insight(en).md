@@ -39,7 +39,7 @@ Attempts to call global functions like `=fetch()` or access `window.location` re
 
 To break out of the sandbox and access the global scope, we used the classic trick of accessing the global function constructor through the prototypes of basic data types:
 
-```javascript```
+javascript
 =(1).constructor.constructor("YOUR_CODE_HERE")()
 This approach allows the creation of a new function outside the restricted sandbox environment. A test payload confirmed full Remote Code Execution (RCE) within the context of the browser tab.
 
