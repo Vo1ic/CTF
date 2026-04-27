@@ -172,7 +172,7 @@ async def run_exploit():
         
         print("\n[*] LAUNCHING STABLE ARBITRAGE 3.0...")
 
-        while balance < 100_000_000:
+        while balance < 10_000_000:
             try:
                 data = await asyncio.wait_for(wt.receive_datagram(), timeout=5.0)
             except: continue
@@ -271,4 +271,4 @@ if __name__ == "__main__":
 
 ## Flag
 
-`UMDCTF{fu7ur3_j4n3_s7r33t_h1r3}`
+`UMDCTF{fu7ur3_j4n3_s7r33t_h1r3}`
