@@ -14,3 +14,4 @@ Welcome to my repository of Capture The Flag (CTF) writeups. Here you'll find de
 ## 📫 Connect
 - **Team:** [518&imposter](https://defexnn.github.io/ctf_site/)
 - **GitHub:** [Vo1ic](https://github.com/Vo1ic)
+- **Discord:** [CTF KHMNU](https://discord.gg/Sk2YmzRdS)
